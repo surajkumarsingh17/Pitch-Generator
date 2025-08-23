@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PitchCraft AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container" id="app-container">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- HEADER MODIFIED: Logo left, theme switcher right -->
+            <header>
+                <h1>PitchCraft AI</h1>
+                <div class="theme-switcher">
+                    <input type="checkbox" id="theme-toggle">
+                    <label for="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </label>
+                </div>
+            </header>
+
+            <!-- Sub-header text moved out of the main header for cleaner alignment -->
+            <p class="sub-header-text">Generate your next game-changing business pitch with the power of AI.</p>
+            
+            <section class="input-section">
+                <textarea id="startup-idea" placeholder="Describe your startup idea here..."></textarea>
+            </section>
+            
+            <section class="controls-container">
+                <fieldset>
+                    <legend><i class="fas fa-wand-magic-sparkles"></i> Customize Your Pitch</legend>
+                    <div class="control-group-row">
+                        <div class="control-group">
+                            <label for="tone-of-voice">Tone of Voice</label>
+                            <select id="tone-of-voice">
+                                <option>Professional</option>
+                                <option>Witty</option>
+                                <option>Inspirational</option>
+                                <option>Enthusiastic</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="target-audience">Target Audience</label>
+                            <select id="target-audience">
+                                <option>Investors</option>
+                                <option>Customers</option>
+                                <option>Potential Employees</option>
+                                <option>A General Audience</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Include Sections</legend>
+                    <div class="checkbox-group" id="sections-group">
+                        <input type="checkbox" id="cb-pitch" value="elevator_pitch" checked><label for="cb-pitch">Elevator Pitch</label>
+                        <input type="checkbox" id="cb-bullets" value="slide_bullets" checked><label for="cb-bullets">Slide Bullets</label>
+                        <input type="checkbox" id="cb-tagline" value="tagline" checked><label for="cb-tagline">Tagline</label>
+                        <input type="checkbox" id="cb-value" value="value_proposition"><label for="cb-value">Value Proposition</label>
+                        <input type="checkbox" id="cb-competitors" value="competitors"><label for="cb-competitors">Competitors</label>
+                        <input type="checkbox" id="cb-revenue" value="revenue_models"><label for="cb-revenue">Revenue Models</label>
+                        <input type="checkbox" id="cb-swot" value="swot_analysis"><label for="cb-swot"><i class="fas fa-star"></i> SWOT Analysis</label>
+                    </div>
+                </fieldset>
+            </section>
+            
+            <button id="generate-btn">
+                <span class="btn-text">Generate Pitch</span>
+                <div class="btn-loader"></div>
+            </button>
+
+            <section id="result-container">
+                <div class="placeholder">Your generated pitch will appear here...</div>
+            </section>
+        </main>
+
+        <!-- History Sidebar -->
+        <aside class="history-sidebar">
+            <div class="history-header">
+                <h2><i class="fas fa-history"></i> History</h2>
+                <button id="clear-history-btn">Clear</button>
+            </div>
+            <ul id="history-list">
+                <!-- History items will be injected here -->
+            </ul>
+        </aside>
+        
+        <button id="history-toggle-btn"><i class="fas fa-chevron-left"></i></button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
