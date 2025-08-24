@@ -12,7 +12,6 @@
     <div class="app-container" id="app-container">
         <!-- Main Content -->
         <main class="main-content">
-            <!-- HEADER MODIFIED: Logo left, theme switcher right -->
             <header>
                 <h1>PitchCraft AI</h1>
                 <div class="theme-switcher">
@@ -24,11 +23,10 @@
                 </div>
             </header>
 
-            <!-- Sub-header text moved out of the main header for cleaner alignment -->
             <p class="sub-header-text">Generate your next game-changing business pitch with the power of AI.</p>
             
             <section class="input-section">
-                <textarea id="startup-idea" placeholder="Describe your startup idea here..."></textarea>
+                <textarea id="idea-input" placeholder="Describe your startup idea here..."></textarea>
             </section>
             
             <section class="controls-container">
@@ -36,8 +34,8 @@
                     <legend><i class="fas fa-wand-magic-sparkles"></i> Customize Your Pitch</legend>
                     <div class="control-group-row">
                         <div class="control-group">
-                            <label for="tone-of-voice">Tone of Voice</label>
-                            <select id="tone-of-voice">
+                            <label for="tone-select">Tone of Voice</label>
+                            <select id="tone-select">
                                 <option>Professional</option>
                                 <option>Witty</option>
                                 <option>Inspirational</option>
@@ -45,8 +43,8 @@
                             </select>
                         </div>
                         <div class="control-group">
-                            <label for="target-audience">Target Audience</label>
-                            <select id="target-audience">
+                            <label for="audience-select">Target Audience</label>
+                            <select id="audience-select">
                                 <option>Investors</option>
                                 <option>Customers</option>
                                 <option>Potential Employees</option>
@@ -56,7 +54,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset>
+                <fieldset id="sections-fieldset">
                     <legend>Include Sections</legend>
                     <div class="checkbox-group" id="sections-group">
                         <input type="checkbox" id="cb-pitch" value="elevator_pitch" checked><label for="cb-pitch">Elevator Pitch</label>

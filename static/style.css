@@ -1,11 +1,7 @@
-/* static/style.css - THE COMPLETE AND FINAL VERSION */
-
-/* --- Google Font Import --- */
+/* static/style.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
-/* --- 1. THEME COLOR VARIABLES --- */
 :root {
-    /* DARK THEME (DEFAULT) - "Cyberpunk Sunset" */
     --bg-dark: #0d0c22;
     --bg-medium: #1a1936;
     --bg-light: #2a2850;
@@ -20,7 +16,6 @@
 }
 
 body.theme-light {
-    /* LIGHT THEME */
     --bg-dark: #f0f2f5;
     --bg-medium: #ffffff;
     --bg-light: #f8f9fa;
@@ -31,158 +26,42 @@ body.theme-light {
     --border-color: #dee2e6;
 }
 
-/* --- 2. GENERAL STYLING --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-family); background-color: var(--bg-dark); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s, color 0.3s; }
 .app-container { display: flex; position: relative; min-height: 100vh; }
 
-/* --- 3. MAIN CONTENT AREA & NEW HEADER --- */
 .main-content { flex-grow: 1; padding: 2.5rem 4rem; overflow-y: auto; transition: margin-right var(--transition-speed) ease-in-out; margin-right: var(--sidebar-width); }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+header h1 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); border: 2px solid var(--border-color); padding: 0.5rem 1.5rem; border-radius: 8px; transition: all 0.3s ease; }
+header h1:hover { border-color: var(--primary-accent); color: #fff; }
+.sub-header-text { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin-bottom: 2.5rem; text-align: left; }
+textarea { width: 100%; height: 120px; padding: 1rem; border-radius: 8px; border: 2px solid var(--border-color); background-color: transparent; color: var(--text-primary); font-family: var(--font-family); font-size: 1rem; resize: vertical; transition: all 0.3s ease; }
+textarea:focus { outline: none; border-color: var(--primary-accent); box-shadow: 0 0 15px rgba(255, 0, 230, 0.3); }
 
-/* MODIFIED: Header is now a flex container for logo and theme switch */
-header { 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-/* MODIFIED: Boxed logo style */
-header h1 { 
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-header h1:hover {
-    border-color: var(--primary-accent);
-    color: #fff;
-}
-
-/* Sub-header text styling */
-.sub-header-text {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin-bottom: 2.5rem;
-    text-align: left; /* Ensure it's left aligned */
-}
-
-textarea { 
-    width: 100%; 
-    height: 120px;
-    padding: 1rem; 
-    border-radius: 8px; 
-    border: 2px solid var(--border-color); /* Slightly thicker border */
-    background-color: transparent; /* Transparent background */
-    color: var(--text-primary); 
-    font-family: var(--font-family); 
-    font-size: 1rem; 
-    resize: vertical; 
-    transition: all 0.3s ease; 
-}
-textarea:focus { 
-    outline: none; 
-    border-color: var(--primary-accent); 
-    box-shadow: 0 0 15px rgba(255, 0, 230, 0.3); /* Neon glow on focus */
-}
-
-/* --- 4. THEME SWITCHER (POSITIONING REMOVED) --- */
-.theme-switcher {
-    position: relative; /* Changed from fixed */
-}
+.theme-switcher { position: relative; }
 .theme-switcher input { display: none; }
-.theme-switcher label {
-    cursor: pointer;
-    width: 60px; height: 30px;
-    background-color: var(--bg-light);
-    display: flex; align-items: center; justify-content: space-between;
-    border-radius: 50px; padding: 5px;
-    position: relative;
-    transform: scale(1.1);
-    transition: background-color 0.3s;
-}
-.theme-switcher label::after {
-    content: "";
-    position: absolute;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background-color: var(--bg-dark);
-    top: 4px; left: 4px;
-    transition: transform 0.3s ease, background-color 0.3s;
-}
+.theme-switcher label { cursor: pointer; width: 60px; height: 30px; background-color: var(--bg-light); display: flex; align-items: center; justify-content: space-between; border-radius: 50px; padding: 5px; position: relative; transform: scale(1.1); transition: background-color 0.3s; }
+.theme-switcher label::after { content: ""; position: absolute; width: 22px; height: 22px; border-radius: 50%; background-color: var(--bg-dark); top: 4px; left: 4px; transition: transform 0.3s ease, background-color 0.3s; }
 .theme-switcher input:checked + label::after { transform: translateX(30px); }
 .theme-switcher i { font-size: 16px; }
 .theme-switcher .fa-moon { color: #f1c40f; }
 .theme-switcher .fa-sun { color: #f39c12; }
 
-/* --- 5. CUSTOMIZATION CONTROLS --- */
 .controls-container { margin: 2.5rem 0; }
-fieldset { 
-    border: none; 
-    padding: 1.5rem 2rem; 
-    margin-bottom: 1.5rem; 
-    background-color: var(--bg-medium); 
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-fieldset legend { 
-    font-weight: 600; 
-    font-size: 1.2rem; 
-    color: var(--text-primary); 
-    margin-bottom: 1.5rem;
-    padding: 0 0.5rem;
-}
+fieldset { border: none; padding: 1.5rem 2rem; margin-bottom: 1.5rem; background-color: var(--bg-medium); border-radius: 12px; border: 1px solid var(--border-color); }
+fieldset legend { font-weight: 600; font-size: 1.2rem; color: var(--text-primary); margin-bottom: 1.5rem; padding: 0 0.5rem; }
 fieldset legend .fas { margin-right: 10px; color: var(--secondary-accent); }
 .control-group-row { display: flex; gap: 2rem; }
 .control-group { flex-grow: 1; text-align: left; }
 .control-group label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
-.control-group select { 
-    width: 100%; 
-    padding: 12px; 
-    border-radius: 8px; 
-    border: 1px solid var(--border-color); 
-    background-color: var(--bg-light); 
-    color: var(--text-primary); 
-    font-size: 1rem; 
-}
-.checkbox-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
-}
+.control-group select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-light); color: var(--text-primary); font-size: 1rem; }
+.checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
 .checkbox-group input { display: none; }
-.checkbox-group label { 
-    padding: 10px 15px; 
-    border-radius: 8px; 
-    background-color: var(--bg-light); /* MODIFIED: Unselected state */
-    color: var(--text-secondary); 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-    border: 1px solid transparent; 
-    text-align: center;
-}
-.checkbox-group label:hover {
-    border-color: var(--border-color);
-    color: var(--text-primary);
-}
-.checkbox-group input:checked + label { 
-    background-color: var(--primary-accent); 
-    color: #fff; 
-    font-weight: 700; 
-    border-color: var(--primary-accent); 
-    box-shadow: 0 0 10px rgba(255, 0, 230, 0.4);
-}
-.checkbox-group label .fas {
-    margin-right: 5px;
-    font-size: 0.9em;
-}
+.checkbox-group label { padding: 10px 15px; border-radius: 8px; background-color: var(--bg-light); color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; border: 1px solid transparent; text-align: center; }
+.checkbox-group label:hover { border-color: var(--border-color); color: var(--text-primary); }
+.checkbox-group input:checked + label { background-color: var(--primary-accent); color: #fff; font-weight: 700; border-color: var(--primary-accent); box-shadow: 0 0 10px rgba(255, 0, 230, 0.4); }
+.checkbox-group label .fas { margin-right: 5px; font-size: 0.9em; }
 
-/* --- 6. GENERATE BUTTON & RESULT CONTAINER --- */
 #generate-btn { width: 100%; padding: 1rem; font-size: 1.2rem; font-weight: 700; color: #fff; border: none; border-radius: 8px; cursor: pointer; background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent)); background-size: 200% 100%; transition: all 0.4s ease; position: relative; }
 #generate-btn:hover { background-position: 100% 0; box-shadow: 0 0 25px rgba(255, 0, 230, 0.5); }
 #generate-btn.loading .btn-text { opacity: 0; }
@@ -192,14 +71,13 @@ fieldset legend .fas { margin-right: 10px; color: var(--secondary-accent); }
 
 #result-container { margin-top: 2.5rem; background: transparent; padding: 0; border: none; min-height: 200px; }
 #result-container .placeholder { color: var(--text-secondary); text-align: center; background-color: var(--bg-medium); padding: 2rem; border-radius: 8px; border: 2px dashed var(--border-color); }
-.result-block { background-color: var(--bg-medium); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.result-block { background-color: var(--bg-medium); border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 body.theme-light .result-block { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
 .result-block h2 { color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin: 0 0 1.5rem 0; }
 .result-block ul { padding-left: 20px; }
 .result-block li { margin-bottom: 0.5rem; }
 .result-block strong { font-weight: 700; color: var(--text-primary); }
 
-/* --- 7. SLIDABLE HISTORY SIDEBAR & TOGGLE --- */
 .history-sidebar { width: var(--sidebar-width); min-width: var(--sidebar-width); background-color: var(--bg-medium); border-left: 1px solid var(--border-color); padding: 2rem; display: flex; flex-direction: column; position: fixed; right: 0; top: 0; height: 100%; transform: translateX(0); transition: transform var(--transition-speed) ease-in-out, background-color 0.3s; box-shadow: -10px 0 30px rgba(0,0,0,0.25); }
 #history-toggle-btn { position: fixed; top: 50%; right: var(--sidebar-width); transform: translateY(-50%); z-index: 1000; width: 30px; height: 60px; background-color: var(--primary-accent); color: #fff; border: none; border-radius: 8px 0 0 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all var(--transition-speed) ease-in-out; }
 #history-toggle-btn:hover { filter: brightness(90%); }
@@ -214,13 +92,12 @@ body.theme-light .result-block { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
 .history-header i { margin-right: 10px; color: var(--secondary-accent); }
 #clear-history-btn { background: none; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
 #clear-history-btn:hover { background-color: var(--bg-light); color: var(--text-primary); }
-#history-list { list-style: none; overflow-y: auto; flex-grow: 1; }
+#history-list { list-style: none; overflow-y: auto; flex-grow: 1; padding: 0; }
 .history-item { background-color: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; cursor: pointer; border: 1px solid transparent; transition: all 0.3s ease; }
 .history-item:hover { border-color: var(--primary-accent); transform: translateY(-2px); }
 .history-item h3 { font-size: 1rem; color: var(--text-primary); margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .history-item p { font-size: 0.8rem; color: var(--text-secondary); }
 
-/* --- 8. RESPONSIVE DESIGN --- */
 @media (max-width: 1200px) { .main-content { padding: 2rem; } }
 @media (max-width: 900px) {
     .main-content { margin-right: 0; }

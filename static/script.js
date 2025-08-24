@@ -43,25 +43,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 4. ADVANCED RESPONSE PROCESSING ---
     const processAndRenderResponse = (pitch) => {
+        // Use marked.js to convert markdown to HTML
         let processedHtml = marked.parse(pitch);
-        processedHtml = processedHtml.replace(/\[KEY_METRIC\](.*?)\[\/KEY_METRIC\]/g, '<span class="key-metric">$1</span>');
         
-        resultContainer.innerHTML = '';
+        resultContainer.innerHTML = ''; // Clear previous results
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = processedHtml;
 
+        // Group content under H2 tags into styled blocks
         let currentBlock = null;
         Array.from(tempDiv.childNodes).forEach(node => {
             if (node.nodeName === 'H2') {
-                if (currentBlock) resultContainer.appendChild(currentBlock);
+                if (currentBlock) resultContainer.appendChild(currentBlock); // Append the previous block
                 currentBlock = document.createElement('div');
                 currentBlock.className = 'result-block';
                 currentBlock.appendChild(node);
             } else if (currentBlock) {
+                // Append paragraphs, lists, etc., to the current block
                 currentBlock.appendChild(node.cloneNode(true));
+            } else {
+                 // If content appears before the first H2, wrap it too
+                 if (node.textContent.trim()) {
+                    currentBlock = document.createElement('div');
+                    currentBlock.className = 'result-block';
+                    currentBlock.appendChild(node.cloneNode(true));
+                 }
             }
         });
 
+        // Append the last block if it exists
         if (currentBlock) resultContainer.appendChild(currentBlock);
     };
     
@@ -76,10 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.classList.add('history-item');
         li.dataset.id = item.id;
-        const title = item.idea.split('\n')[0].substring(0, 30) + '...';
+        // Truncate long ideas for the history view
+        const title = item.idea.split('\n')[0].substring(0, 30) + (item.idea.length > 30 ? '...' : '');
         const date = new Date(item.timestamp).toLocaleString();
         li.innerHTML = `<h3>${title}</h3><p>${date}</p>`;
         
+        // Event listener to load a history item when clicked
         li.addEventListener('click', () => {
             ideaInput.value = item.idea;
             processAndRenderResponse(item.pitch);
@@ -89,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cb.checked = item.options.sections.includes(cb.value);
             });
         });
-        historyList.prepend(li);
+        historyList.prepend(li); // Prepend to show the newest items first
     };
 
     const saveToHistory = (idea, options, pitch) => {
@@ -110,23 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 6. MAIN GENERATION LOGIC ---
     const handleGeneration = async () => {
         const idea = ideaInput.value;
-        if (!idea.trim()) {
-            alert('Please enter your startup idea!');
-            return;
-        }
-
         const options = {
             tone: document.getElementById('tone-select').value,
             audience: document.getElementById('audience-select').value,
             sections: Array.from(document.querySelectorAll('#sections-fieldset input:checked')).map(cb => cb.value)
         };
 
+        if (!idea.trim()) {
+            alert('Please enter your startup idea!');
+            return;
+        }
         if (options.sections.length === 0) {
             alert('Please select at least one section to generate!');
             return;
         }
 
         generateBtn.classList.add('loading');
+        generateBtn.disabled = true;
         resultContainer.innerHTML = '<div class="placeholder">🧠 Crafting your masterpiece... Please wait.</div>';
 
         try {
@@ -136,17 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ idea, options }),
             });
 
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            
             const data = await response.json();
+            if (!response.ok) throw new Error(data.error || `HTTP error! Status: ${response.status}`);
+            
             processAndRenderResponse(data.pitch);
             saveToHistory(idea, options, data.pitch);
 
         } catch (error) {
             console.error('Error:', error);
-            resultContainer.innerHTML = `<div class="placeholder">❌ An error occurred. Please check the console.</div>`;
+            resultContainer.innerHTML = `<div class="placeholder error">❌ An error occurred: ${error.message}</div>`;
         } finally {
             generateBtn.classList.remove('loading');
+            generateBtn.disabled = false;
         }
     };
 
