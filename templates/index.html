@@ -28,7 +28,8 @@
             <p class="sub-header-text">Generate your next game-changing business pitch with the power of AI.</p>
             
             <section class="input-section">
-                <textarea id="startup-idea" placeholder="Describe your startup idea here..."></textarea>
+                <!-- ID CHANGED from "startup-idea" to "idea-input" -->
+                <textarea id="idea-input" placeholder="Describe your startup idea here..."></textarea>
             </section>
             
             <section class="controls-container">
@@ -36,8 +37,9 @@
                     <legend><i class="fas fa-wand-magic-sparkles"></i> Customize Your Pitch</legend>
                     <div class="control-group-row">
                         <div class="control-group">
-                            <label for="tone-of-voice">Tone of Voice</label>
-                            <select id="tone-of-voice">
+                            <label for="tone-select">Tone of Voice</label>
+                            <!-- ID CHANGED from "tone-of-voice" to "tone-select" -->
+                            <select id="tone-select">
                                 <option>Professional</option>
                                 <option>Witty</option>
                                 <option>Inspirational</option>
@@ -45,8 +47,9 @@
                             </select>
                         </div>
                         <div class="control-group">
-                            <label for="target-audience">Target Audience</label>
-                            <select id="target-audience">
+                            <label for="audience-select">Target Audience</label>
+                            <!-- ID CHANGED from "target-audience" to "audience-select" -->
+                            <select id="audience-select">
                                 <option>Investors</option>
                                 <option>Customers</option>
                                 <option>Potential Employees</option>
@@ -56,7 +59,8 @@
                     </div>
                 </fieldset>
 
-                <fieldset>
+                <!-- ID ADDED to this fieldset for JavaScript to find it -->
+                <fieldset id="sections-fieldset">
                     <legend>Include Sections</legend>
                     <div class="checkbox-group" id="sections-group">
                         <input type="checkbox" id="cb-pitch" value="elevator_pitch" checked><label for="cb-pitch">Elevator Pitch</label>
@@ -94,6 +98,7 @@
         <button id="history-toggle-btn"><i class="fas fa-chevron-left"></i></button>
     </div>
 
+    <!-- This script is required by your new JavaScript file to parse the output -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
