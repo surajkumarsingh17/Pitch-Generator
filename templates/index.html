@@ -26,6 +26,7 @@
             <p class="sub-header-text">Generate your next game-changing business pitch with the power of AI.</p>
             
             <section class="input-section">
+                <!-- ID CHANGED from "startup-idea" to "idea-input" -->
                 <textarea id="idea-input" placeholder="Describe your startup idea here..."></textarea>
             </section>
             
@@ -35,6 +36,7 @@
                     <div class="control-group-row">
                         <div class="control-group">
                             <label for="tone-select">Tone of Voice</label>
+                            <!-- ID CHANGED from "tone-of-voice" to "tone-select" -->
                             <select id="tone-select">
                                 <option>Professional</option>
                                 <option>Witty</option>
@@ -44,6 +46,7 @@
                         </div>
                         <div class="control-group">
                             <label for="audience-select">Target Audience</label>
+                            <!-- ID CHANGED from "target-audience" to "audience-select" -->
                             <select id="audience-select">
                                 <option>Investors</option>
                                 <option>Customers</option>
@@ -54,6 +57,7 @@
                     </div>
                 </fieldset>
 
+                <!-- ID ADDED to this fieldset for JavaScript to find it -->
                 <fieldset id="sections-fieldset">
                     <legend>Include Sections</legend>
                     <div class="checkbox-group" id="sections-group">
@@ -92,6 +96,7 @@
         <button id="history-toggle-btn"><i class="fas fa-chevron-left"></i></button>
     </div>
 
+    <!-- This script is required by your new JavaScript file to parse the output -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
